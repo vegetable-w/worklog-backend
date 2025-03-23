@@ -7,6 +7,8 @@ const punchRouter = require("./routes/punchRoutes");
 const businessTripRouter = require("./routes/businessTripRoutes");
 const punchRuleRouter = require("./routes/punchRuleRoutes");
 
+require("dotenv").config();
+
 const app = express();
 app.use(express.json());
 
@@ -20,7 +22,8 @@ app.use("/api/v1/punch", punchRouter);
 app.use("/api/v1/business-trip", businessTripRouter);
 app.use("/api/v1/punch-rule", punchRuleRouter);
 
-app.listen(3000, async () => {
+const port = process.env.PORT || 3000;
+app.listen(port, async () => {
   console.log("Server is running on http://localhost:3000");
   try {
     await pool.query("SELECT NOW()");
